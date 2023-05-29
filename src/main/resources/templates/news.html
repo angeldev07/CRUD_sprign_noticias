@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <html xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Agregar nueva noticia</title>
+</head>
+<body class="p-4 bg-[#0d1b2a] min-h-screen text-white">
+    <h1 class="text-3xl text-center mb-6">Agregar nueva noticia</h1>
+
+    <section class="w-[90%]  max-w-[700px] mx-auto p-4 bg-[#415a77]">
+        <th:block th:if="${noticia.id == 0}">
+            <form action="/news/add" method="post" th:object="${noticia}">
+                <div class="py-4">
+                    <input type="text" required placeholder="titulo" th:field="*{titulo}" class="block text-black w-full py-2 px-4">
+                </div>
+                <div class="py-4">
+                    <input type="text" required placeholder="desarrollo" th:field="*{desarrollo}" class="block text-black w-full py-2 px-4">
+                </div>
+                <div class="py-4">
+                    <input type="text" required placeholder="resumen" th:field="*{resumen}" class="block text-black w-full py-2 px-4">
+                </div>
+                <div class="py-4">
+                    <label for="countries" class="block mb-2 text-sm font-medium text-white">Seleccione una categoria</label>
+                    <select id="countries" required th:field="*{categoriaId}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.descripcion}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="bg-green-500 inline-block py-1 px-6 text-white">Enviar</button>
+            </form>
+        </th:block>
+
+        <th:block th:if="${noticia.id != -1}">
+            <form action="/news/editNew" method="post" th:object="${noticia}">
+                <div>editando</div>
+                <div class="py-4 hidden">
+                    <input type="number" required placeholder="id" th:field="*{id}" class="block text-black w-full py-2 px-4">
+                </div>
+                <div class="py-4">
+                    <input type="text" required placeholder="titulo" th:field="*{titulo}" class="block text-black w-full py-2 px-4">
+                </div>
+                <div class="py-4">
+                    <input type="text" required placeholder="desarrollo" th:field="*{desarrollo}" class="block text-black w-full py-2 px-4">
+                </div>
+                <div class="py-4">
+                    <input type="text" required placeholder="resumen" th:field="*{resumen}" class="block text-black w-full py-2 px-4">
+                </div>
+                <div class="py-4">
+                    <label for="countries" class="block mb-2 text-sm font-medium text-white">Seleccione una categoria</label>
+                    <select id="countries" required th:field="*{categoriaId}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.descripcion}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="bg-green-500 inline-block py-1 px-6 text-white">Enviar</button>
+            </form>
+        </th:block>
+            
+    </section>
+
+</body>
+</html>
+
+<!-- 
+
+
+    titulo;
+
+    desarrollo;
+
+    fecha;
+
+    url;
+
+    resumen;
+
+    CatergoriaNews categoria;
+ -->

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Listado de noticias</title>
+    
+    <style>
+        .grilla {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-auto-rows: 1fr;
+            gap: 1rem
+        }
+    </style>
+</head>
+<body class="p-4 bg-[#0d1b2a] min-h-screen text-white">
+    <header>
+        <h1 class="text-4xl text-center">Listado de noticias</h1>
+    </header>
+
+    <main class="min-h-screen w-[90%] mx-auto max-w-[1100px]">
+        <section class="w-full p-4 ">
+            <div class="mb-6 flex justify-between">
+                <a href="/news/addNews" class="inline-block py-1 px-4 ml-auto text-white font-bold bg-[#2a9d8f] rounded-md" >Agregar nueva noticia</a>
+            </div>
+            <div class="grilla ">
+                <div class="p-4 w-full h-full rounded-md bg-[#415a77] shadow-lg" th:each="noticia : ${lista}">
+                    <h2 class="pb-4 text-xl font-bold " th:text="${noticia.titulo}"></h2>
+                    <!-- fecha y categoria -->
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="" th:text="${noticia.fecha}">  </span>
+                        <span class="inline-block py-1 px-4 rounded-md text-white bg-green-500" th:text="${noticia.categoria.descripcion}"></span>
+                    </div>
+                    <p class="pb-4 font-light" th:text="${noticia.desarrollo}"></p>
+                    <!-- botones -->
+                    <div class="flex justify-between">
+                        <div class="ml-auto">
+                            <a th:href="@{/news/edit/{id}(id=${noticia.id})}" class="inline-block py-1 px-4 mr-4 text-white font-bold bg-[#2a9d8f]">Editar</a>
+                            <a th:href="@{/news/delete/{id}(id=${noticia.id})}" class="inline-block py-1 px-4 text-white font-bold bg-[#e76f51]">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
